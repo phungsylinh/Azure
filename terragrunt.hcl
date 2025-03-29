@@ -21,8 +21,8 @@ terraform {
     extra_arguments "auto_tfvars_loader" {
         commands = get_terraform_commands_that_need_vars()
         optional_var_files = [
-            "${get_repo_root()}/vnets.tfvars",
-            "${get_repo_root()}/vms.tfvars"
+            "${get_repo_root()}/vms/default.tfvars",
+            "${get_repo_root()}/vnets/default.tfvars"
         ]
     }
 #before hook
