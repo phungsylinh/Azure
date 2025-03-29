@@ -1,7 +1,6 @@
 resource "azurerm_resource_group" "example" {
   name     = "${var.prefix}-resources"
   location = "Korea Central"
-  prevent_deletion_if_contains_resources = false
 }
 
 resource "azurerm_virtual_network" "main" {
