@@ -1,5 +1,3 @@
-prefix = "tfvmex"
-
 vms = {
   vm01 = {
     size = "Standard_DS2_v2"

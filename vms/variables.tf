@@ -1,6 +1,3 @@
-variable "prefix" {
-  default = "tfvmex"
-}
 variable vms {
     type = map(object({              
         size = optional(string,"Standard_DS1_v2")

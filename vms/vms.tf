@@ -1,10 +1,10 @@
 resource "azurerm_resource_group" "example" {
-  name     = "${var.prefix}-resources"
+  name     = "linh-resources"
   location = "Korea Central"
 }
 
 resource "azurerm_virtual_network" "main" {
-  name                = "${var.prefix}-network"
+  name                = "linh-network"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.example.location
   resource_group_name = azurerm_resource_group.example.name
