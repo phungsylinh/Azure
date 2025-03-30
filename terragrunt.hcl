@@ -43,18 +43,35 @@ provider "azurerm" {
 EOF
 }
 
+# terraform {
+#     source = "git::https://github.com/phungsylinh/Azure.git//root?ref=main"
+#     extra_arguments "auto_tfvars_loader" {
+#         commands = get_terraform_commands_that_need_vars()
+#         optional_var_files = [
+#             "${get_repo_root()}/vms/default.tfvars"
+#             #"${get_repo_root()}/vnets/default.tfvars"
+#         ]
+#     }
+#         before_hook "merge_variables" {
+#         commands = ["init", "plan", "apply", "destory"]
+#         execute  = ["bash", "merge.sh"]
+#     }
+# #before hook
+# }
 terraform {
-    source = "git::https://github.com/phungsylinh/Azure.git//root?ref=main"
-    extra_arguments "auto_tfvars_loader" {
-        commands = get_terraform_commands_that_need_vars()
-        optional_var_files = [
-            "${get_repo_root()}/vms/default.tfvars"
-            #"${get_repo_root()}/vnets/default.tfvars"
-        ]
+  source  = "./root"
+  extra_arguments "load_tfvars" {
+    commands = get_terraform_commands_that_need_vars()
+
+    arguments = [
+      "-var-file=${get_terragrunt_dir()}/vms/default.tfvars"
+    ]
+  }
+         before_hook "merge_variables" {
+        commands = ["init", "plan", "apply", "destroy"]
+        execute  = ["bash", "${get_repo_root()}/merge.sh"]
     }
-        before_hook "merge_variables" {
-        commands = ["init", "plan", "apply", "destory"]
-        execute  = ["bash", "merge.sh"]
-    }
-#before hook
 }
+# locals {
+#   vms_vars = read_tfvars_file("${get_terragrunt_dir()}/vms/default.tfvars")
+# }
