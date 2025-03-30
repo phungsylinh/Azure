@@ -5,5 +5,6 @@
 # }
 module "vms" {
     source = "./vms"
+    vms=var.vms
     #depends_on = [module.resource_groups]
 }
