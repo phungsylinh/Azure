@@ -1,4 +1,5 @@
 Merge="./variables.tf"
+echo "$(pwd)"
 if [ -e ${Merge} ]; then
     rm -f ${Merge}
 fi
