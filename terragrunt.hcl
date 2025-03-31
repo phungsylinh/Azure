@@ -44,7 +44,7 @@ EOF
 }
 
 # terraform {
-#     source = "git::https://github.com/phungsylinh/Azure.git//core?ref=main"
+#     source = "git::https://github.com/phungsylinh/Azure.git//root?ref=main"
 #     extra_arguments "auto_tfvars_loader" {
 #         commands = get_terraform_commands_that_need_vars()
 #         optional_var_files = [
@@ -59,7 +59,8 @@ EOF
 # #before hook
 # }
 terraform {
-  source  = "./root"
+  source  = "git::https://github.com/phungsylinh/Azure.git//core?ref=main"
+  #source = "./core"
   extra_arguments "load_tfvars" {
       commands = get_terraform_commands_that_need_vars()
 
@@ -74,10 +75,6 @@ terraform {
   before_hook "print_pwd" {
         commands = ["apply", "plan", "init", "destroy"]
         execute  = ["bash", "-c", "echo Current directory: $(pwd)"]
-  }
-  before_hook "print_pwd" {
-        commands = ["apply", "plan", "init", "destroy"]
-        execute  = ["bash", "-c", "cd .."]
   }
 }
 # locals {
