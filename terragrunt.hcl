@@ -44,7 +44,7 @@ EOF
 }
 
 # terraform {
-#     source = "git::https://github.com/phungsylinh/Azure.git//root?ref=main"
+#     source = "git::https://github.com/phungsylinh/Azure.git//core?ref=main"
 #     extra_arguments "auto_tfvars_loader" {
 #         commands = get_terraform_commands_that_need_vars()
 #         optional_var_files = [
