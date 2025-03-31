@@ -61,16 +61,24 @@ EOF
 terraform {
   source  = "./root"
   extra_arguments "load_tfvars" {
-    commands = get_terraform_commands_that_need_vars()
+      commands = get_terraform_commands_that_need_vars()
 
-    arguments = [
+      arguments = [
       "-var-file=${get_terragrunt_dir()}/vms/default.tfvars"
-    ]
+      ]
   }
-         before_hook "merge_variables" {
+  before_hook "merge_variables" {
         commands = ["init", "plan", "apply", "destroy"]
         execute  = ["bash", "${get_repo_root()}/merge.sh"]
-    }
+  }
+  before_hook "print_pwd" {
+        commands = ["apply", "plan", "init", "destroy"]
+        execute  = ["bash", "-c", "echo Current directory: $(pwd)"]
+  }
+  before_hook "print_pwd" {
+        commands = ["apply", "plan", "init", "destroy"]
+        execute  = ["bash", "-c", "cd .."]
+  }
 }
 # locals {
 #   vms_vars = read_tfvars_file("${get_terragrunt_dir()}/vms/default.tfvars")
